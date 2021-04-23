@@ -1,0 +1,198 @@
+:root {
+    --line-move-delay: 0ms;
+    --transition-time: 0ms;
+    --line-rotation-top: 0deg;
+    --wiggle-over-lg: 0deg;
+    --wiggle-under-lg: 0deg;
+    --wiggle-over-md: 0deg;
+    --wiggle-under-md: 0deg;
+    --wiggle-over-sm: 0deg;
+    --wiggle-under-sm: 0deg;
+}
+
+body{
+    margin: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color: #000000;
+}
+.container{
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input {
+    outline: none;
+}
+
+.seconds-input {
+    padding: 0.25em;
+    border: none;
+    text-align: center;
+    font-size: 2rem;
+    
+}
+
+.random-number {
+    align-self: center;
+    padding: 0.5rem 4rem;
+    text-align: center;
+    margin-bottom: 0.5em;
+    height: 100px;
+    font-size: 18vmin;
+    color: #ffffff;
+}
+
+.cantar-container{
+    position: relative;
+    width: 100%;
+    max-height: 484px;
+}
+
+.cantar-img{
+    display: block;
+    width: 100%;
+    object-fit: contain;
+    object-position: top;
+    filter: invert(1);
+}
+
+.line{
+    position: absolute;
+
+    left: calc(7% - 0.5vmin);
+    width: 43%;
+    height: 0.5vmin;
+    bottom: 10.5%;
+    
+    background-color: palevioletred;
+    transform-origin: right;
+
+    /* border-radius: 50%; */
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+
+    /* rotation init value */
+    transform: rotate(0deg);
+}
+
+.line-animation {
+    /* delay to be set from variable by JS */
+    animation: lineMove var(--transition-time) var(--line-move-delay) linear infinite;
+}
+
+.circle {
+    position: absolute;
+    
+    /* width and height by ear, still relative cuz % */
+    width: 13%;
+    height: 23%;
+    background-color: rgb(243, 232, 84);
+    bottom: 0;
+    left: calc(50% - 1px);
+    transform: translateX(-50%);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.5s;
+}
+
+.circle:hover {
+    background-color: palevioletred;
+}
+.circle.disabled:hover {
+    background-color: palevioletred;
+}
+.disabled {
+    background-color: palevioletred;
+}
+
+.question {
+    position: absolute;
+    display: block;
+    font-size: 7vmin;
+    color: #ffffff;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
+
+@keyframes lineMove {
+    
+    /* --- wiggle start --- */
+
+
+    /* reach top */
+    27% {
+        transform: rotate(var(--line-rotation-top));
+    }
+
+    /* wiggle speed 1 */
+
+    /* wiggle over */
+    31% {
+        transform: rotate(var(--wiggle-over-lg));
+    }
+    /* wiggle under */
+    34% {
+        transform: rotate(var(--wiggle-under-lg));
+    }
+
+    /* wiggle speed 2 */
+
+    /* wiggle over */
+    38% {
+        transform: rotate(var(--wiggle-over-md));
+    }
+
+    /* wiggle under */
+    
+    42% {
+        transform: rotate(var(--wiggle-under-md));
+    }
+
+    /* wiggle speed 3 */
+
+    /* wiggle over */
+    45% {
+        transform: rotate(var(--wiggle-over-sm));
+    }
+
+    /* wiggle under */
+    
+    47% {
+        transform: rotate(var(--wiggle-under-sm));
+    }
+    
+    /* wiggle stop and hold */
+
+    50% {
+        transform: rotate(var(--line-rotation-top));
+    }
+
+    /* hold until this point === release start */
+    90% {
+        transform: rotate(var(--line-rotation-top));
+    }
+    
+    /* automatic reset (100% - percentage above) */
+}
