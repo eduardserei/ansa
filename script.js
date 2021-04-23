@@ -19,11 +19,10 @@ let totalAnimationDuration = waitBeforeLineMove + LINE_MOVING_DURATION
 window.onload = () => {
 
     // --- SELECTORS ---
-    const randomizeBtn = document.querySelector('.circle')
-    const line = document.querySelector('.line')
-    const randNumEl = document.querySelector('.random-number')
+    const measureBtn = document.querySelector('.measure-btn');
+    const line = document.querySelector('.line');
+    const randNumEl = document.querySelector('.random-number');
     const img = document.querySelector('img');
-    const secondsInput = document.querySelector('.seconds-input')
     const root = document.documentElement;
 
     // --- FUNCTION EXPRESSIONS ---
@@ -35,25 +34,21 @@ window.onload = () => {
     const setAnimationReleaseStart = () =>  { animationReleaseStart = waitBeforeLineMove + (LINE_MOVING_DURATION * ANIMATION_TOP)};
 
     //  initializers / reseters / disablers
-    const enableButtonPress = () => { randomizeBtn.style.pointerEvents = 'all' };
-    const resetBtnColor = () => { randomizeBtn.classList.remove('disabled') }
+    const enableButtonPress = () => { measureBtn.style.pointerEvents = 'all' };
+    const resetBtnColor = () => { measureBtn.classList.remove('disabled') }
     const resetRotation = () => { root.style.setProperty('--line-rotation', `0deg`) };
     const resetDisplayValue = () => { randNumEl.textContent = '' };
     const removeLineAnimation = () => { line.classList.remove('line-animation') }
 
     // enablers 
-    const disableButtonPress = () => { randomizeBtn.style.pointerEvents = 'none' };
+    const disableButtonPress = () => { measureBtn.style.pointerEvents = 'none' };
     const setLineRotationValue = (rotationNum) => { root.style.setProperty('--line-rotation-top', `${rotationNum}deg`) };
-    const addDisabledBtnColor = () => { randomizeBtn.classList.add('disabled') };
+    const addDisabledBtnColor = () => { measureBtn.classList.add('disabled') };
     const enableLineAnimation = () => { line.classList.add('line-animation') };
 
     // add event listeners
-    randomizeBtn.addEventListener('mousedown', handleClick);
-    randomizeBtn.addEventListener('touchstart', handleClick);
-    secondsInput.addEventListener('input', function () {
-        const seconds = this.value;
-        checkAndUpdateSecondsInput(seconds);
-    })
+    measureBtn.addEventListener('mousedown', handleClick);
+    measureBtn.addEventListener('touchstart', handleClick);
 
     // init all
     resetDisplayValue();
@@ -104,18 +99,7 @@ window.onload = () => {
             resetBtnColor();
             enableButtonPress();
             animationFinished = true;
-            checkAndUpdateSecondsInput(secondsInput.value);
         }, totalAnimationDuration);
-    }
-
-    function checkAndUpdateSecondsInput(seconds) {
-        if (animationFinished) {
-            const miliseconds = seconds * 1000;
-            waitBeforeLineMove = miliseconds;
-            setWaitLineAnimation(miliseconds);
-            setTotalAnimationDuration();
-            setAnimationReleaseStart();
-        } 
     }
     
     function setWiggleValues(rotationNum) {

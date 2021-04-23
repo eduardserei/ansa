@@ -111,30 +111,27 @@ input {
     left: calc(50% - 1px);
     transform: translateX(-50%);
     border-radius: 50%;
-    cursor: pointer;
     transition: background-color 0.5s;
 }
 
-.circle:hover {
+.measure-btn.disabled {
     background-color: palevioletred;
 }
-.circle.disabled:hover {
-    background-color: palevioletred;
-}
-.disabled {
-    background-color: palevioletred;
-}
-
-.question {
-    position: absolute;
-    display: block;
-    font-size: 7vmin;
-    color: #ffffff;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+ .measure-btn {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    border: groove 2px #ffffff;
+    border-radius: 5px;
+    background-color: rgb(243, 232, 84);
+    font-weight: 600;
+    transition: background-color 0.5s ;
+    font-size: 1.5rem;
     cursor: pointer;
-}
+ }
+
+ .measure-btn:hover {
+    background-color: rgb(199, 191, 74);
+ }
 
 @keyframes lineMove {
     
